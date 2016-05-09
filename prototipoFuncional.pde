@@ -48,6 +48,9 @@ void draw () { //RLY DUDE?
 }
 
 void mousePressed () { //WTF IS WRONG WOTH YOU, you should totally know what this is for
+  if (screen == 0) {
+    screen = 1;
+  }
 }
 
 public void addTrash () {
