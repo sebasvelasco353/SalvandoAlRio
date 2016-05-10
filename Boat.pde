@@ -17,8 +17,8 @@ public class Boat {
    
  }
  
- public void getPosition(){
-   
+ public int getPosition(){
+   return (int) position.x;
  }
  
  public void restart (){

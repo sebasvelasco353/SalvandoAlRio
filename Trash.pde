@@ -31,6 +31,6 @@ public class Trash {
   }
   
   public void moveIt (){
-    
+    posY += 2;
   }
 }
