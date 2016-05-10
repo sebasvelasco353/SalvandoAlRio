@@ -10,7 +10,7 @@ public class Boat {
  }
  
  public void  drawIt (){
-   
+   image (boat, position.x, position.y);
  }
  
  public void move (){
