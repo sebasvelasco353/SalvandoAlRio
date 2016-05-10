@@ -5,7 +5,8 @@ Instalacion interactiva para el cuidado de los rios en la ciudad
  Sebastian Cruz
  Simon Herrera
  
- para la materia: Arte y Tecnologia de la carrera Diseño de medios interactivos en la universidad Icesi.
+ para la materia: Arte y Tecnologia de la carrera 
+ Diseño de medios interactivos en la universidad Icesi.
  */
 
 Boat myBarco; //Boat (aKA Player) object
@@ -32,13 +33,15 @@ void setup () { //I think i dont need to explain this
 
 void draw () { //RLY DUDE?
   switch (screen) {
+    
     //Intro screen
   case 0:
     image (intro, width/2, height/2, width, height);
     break;
+    
     //Game Screen
   case 1:
-
+  
     break;
     //You lost bcause of your bitchin!
   case 2:
@@ -51,7 +54,7 @@ void mousePressed () { //WTF IS WRONG WOTH YOU, you should totally know what thi
   if (screen == 0) {
     screen = 1;
   }
-}
+} //cierro mousePressed
 
 public void addTrash () {
   Trash temp = new Trash ();
@@ -70,3 +73,8 @@ public void loadImages() {
   game = loadImage("bg.png");
   lost = loadImage ("lost.jpg");
 }
+
+public void moveGameScreen (){
+  //yeah, i think the name explains it all...
+  
+} //Closing move method
