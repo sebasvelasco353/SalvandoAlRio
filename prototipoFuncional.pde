@@ -14,7 +14,7 @@ Timer myTimer; //Timer so you dont screw it over time
 
 ArrayList <Trash> myTrash;
 ArrayList <Trash> myEmptyTrash;
-int screen, life, points;
+int screen, life, points, y_Coord; //Y_coord refers to position of gameScreen on Y axis 
 PImage intro, game, lost;
 
 void setup () { //I think i dont need to explain this
@@ -25,6 +25,7 @@ void setup () { //I think i dont need to explain this
   loadImages (); //Method that loads every IMG that im going to use.
   myBarco = new Boat ();
   myTimer = new Timer ();
+  y_Coord = -2712;
 
   myTrash = new ArrayList <Trash>();
   myEmptyTrash = new ArrayList <Trash>();
@@ -33,15 +34,16 @@ void setup () { //I think i dont need to explain this
 
 void draw () { //RLY DUDE?
   switch (screen) {
-    
+
     //Intro screen
   case 0:
     image (intro, width/2, height/2, width, height);
     break;
-    
+
     //Game Screen
   case 1:
-  
+    image (game, width/2, y_Coord);
+    println (screen + " GameScreen Yaxis: " + y_Coord);
     break;
     //You lost bcause of your bitchin!
   case 2:
@@ -74,7 +76,6 @@ public void loadImages() {
   lost = loadImage ("lost.jpg");
 }
 
-public void moveGameScreen (){
+public void moveGameScreen () {
   //yeah, i think the name explains it all...
-  
 } //Closing move method
