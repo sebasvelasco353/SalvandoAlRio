@@ -6,6 +6,7 @@ public class GameScreen {
   }
   public void drawIt () {
     image (game, width/2, y_Coord, width, 5424);
+    //thread ("moveGameScren");
   }
 
   public void moveGameScreen () {

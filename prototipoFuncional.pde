@@ -27,7 +27,7 @@ void setup () { //I think i dont need to explain this
   myBarco = new Boat ();
   myTimer = new Timer ();
   gScreen = new GameScreen ();
-  
+
 
   myTrash = new ArrayList <Trash>();
   myEmptyTrash = new ArrayList <Trash>();
