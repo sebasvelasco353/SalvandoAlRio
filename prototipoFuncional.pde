@@ -49,7 +49,7 @@ void draw () { //RLY DUDE?
     break;
     //You lost bcause of your bitchin!
   case 2:
-
+  image (lost, width/2, height/2, width, height);
     break;
   } //Closing switch
 }
@@ -57,6 +57,8 @@ void draw () { //RLY DUDE?
 void mousePressed () { //WTF IS WRONG WOTH YOU, you should totally know what this is for
   if (screen == 0) {
     screen = 1;
+  } else {
+  screen = 2;
   }
 } //cierro mousePressed
 
