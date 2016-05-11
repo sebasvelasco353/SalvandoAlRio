@@ -22,7 +22,7 @@ ArrayList <Trash> myEmptyTrash;
 int screen, life, points; 
 
 float palmPosition;
-PImage intro, game, lost;
+PImage intro, game, lost, heart;
 
 void setup () { //I think i dont need to explain this
   fullScreen(); //Fullscreen application bitch!
@@ -39,6 +39,7 @@ void setup () { //I think i dont need to explain this
   myTrash = new ArrayList <Trash>();
   myEmptyTrash = new ArrayList <Trash>();
   screen = 0;
+  life = 3;
 }
 
 void draw () { //RLY DUDE?
@@ -57,6 +58,8 @@ void draw () { //RLY DUDE?
 
     myBarco.drawIt ();
     myBarco.move(palmPosition);
+    
+    drawHearts ();
     break;
     //You lost bcause of your bitchin!
   case 2:
@@ -89,6 +92,7 @@ public void loadImages() {
   intro = loadImage ("intro.jpg");
   game = loadImage("bg.png");
   lost = loadImage ("lost.jpg");
+  heart = loadImage ("heart.png");
 }
 
 public void getHandCoord () {
@@ -98,4 +102,12 @@ public void getHandCoord () {
 
     palmPosition = hand_position.x;
   }
+}
+
+public void drawHearts (){
+ if (life == 3){
+  image (heart, 1000, 80);
+  image (heart, 930, 80);
+  image (heart, 850, 80); 
+ }
 }
