@@ -9,13 +9,19 @@ Instalacion interactiva para el cuidado de los rios en la ciudad
  Diseño de medios interactivos en la universidad Icesi.
  */
 
+import de.voidplus.leapmotion.*;
+
 Boat myBarco; //Boat (aKA Player) object
 Timer myTimer; //Timer so you dont screw it over time
 GameScreen gScreen;  //Class for all game related screen
 
+LeapMotion leap;
+
 ArrayList <Trash> myTrash;
 ArrayList <Trash> myEmptyTrash;
 int screen, life, points; 
+
+float palmPosition;
 PImage intro, game, lost;
 
 void setup () { //I think i dont need to explain this
@@ -27,6 +33,7 @@ void setup () { //I think i dont need to explain this
   myBarco = new Boat ();
   myTimer = new Timer ();
   gScreen = new GameScreen ();
+  leap = new LeapMotion (this);
 
 
   myTrash = new ArrayList <Trash>();
@@ -44,12 +51,16 @@ void draw () { //RLY DUDE?
 
     //Game Screen
   case 1:
+    thread ("getHandCoord");
     gScreen.drawIt();
     gScreen.moveGameScreen();
+
+    myBarco.drawIt ();
+    myBarco.move(palmPosition);
     break;
     //You lost bcause of your bitchin!
   case 2:
-  image (lost, width/2, height/2, width, height);
+    image (lost, width/2, height/2, width, height);
     break;
   } //Closing switch
 }
@@ -58,7 +69,7 @@ void mousePressed () { //WTF IS WRONG WOTH YOU, you should totally know what thi
   if (screen == 0) {
     screen = 1;
   } else {
-  screen = 2;
+    screen = 2;
   }
 } //cierro mousePressed
 
@@ -78,4 +89,13 @@ public void loadImages() {
   intro = loadImage ("intro.jpg");
   game = loadImage("bg.png");
   lost = loadImage ("lost.jpg");
+}
+
+public void getHandCoord () {
+  for (Hand hand : leap.getHands ()) {
+    int     hand_id          = hand.getId();
+    PVector hand_position    = hand.getPosition();
+
+    palmPosition = hand_position.x;
+  }
 }

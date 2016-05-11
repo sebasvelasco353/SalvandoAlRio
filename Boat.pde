@@ -1,27 +1,25 @@
-
-
 public class Boat {
   PImage boat;
-  PVector position;
-  
+  float position;
+
  public Boat (){
-   position = new PVector (width/2, height/2);
+   position = width/2;
    boat = loadImage ("boat.png");
  }
  
  public void  drawIt (){
-   image (boat, position.x, position.y);
+   image (boat, position, height -30);
  }
  
- public void move (){
-   
+ public void move (float position){
+   this.position = position;
  }
  
- public int getPosition(){
-   return (int) position.x;
+ public float getPosition(){
+   return position;
  }
  
  public void restart (){
- position = new PVector (width/2, height/2);
+ position = width/2;
  }
 }
