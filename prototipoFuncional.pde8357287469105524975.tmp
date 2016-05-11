@@ -140,7 +140,6 @@ public void validate (){
      if (temp.getPosX () == height -30){
        println ("picked up a trash!");
        myTrash.remove(myTrash.get(i));
-       points +=1;
      }
    }
   }

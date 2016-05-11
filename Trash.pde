@@ -33,4 +33,12 @@ public class Trash {
   public void moveIt (){
     posY += 2;
   }
+  
+  public int getPosX (){
+   return posX; 
+  }
+  
+  public int getPosY (){
+   return posY; 
+  }
 }
