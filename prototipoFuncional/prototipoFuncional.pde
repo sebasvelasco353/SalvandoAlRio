@@ -149,7 +149,3 @@ public void validate (){
    }
   }
 }
-
-public void timer () {
-  
-}

@@ -21,7 +21,7 @@ class Timer {
    void start()
    {
      running = true ;
-     startTime = millis() ;
+     startTime = millis();
    }
 
   public void restart()
