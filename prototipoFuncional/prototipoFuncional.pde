@@ -52,7 +52,7 @@ void draw () { //RLY DUDE?
     thread ("addTrash");
     thread ("getHandCoord");
     thread ("validate");
-    thread ("timer");
+    //thread ("timer");
     
     gScreen.drawIt();
     gScreen.moveGameScreen();
@@ -138,7 +138,7 @@ public void validate (){
   for (int i = 0; i < myTrash.size (); i++){
     //Trash temp = myTrash.get(i);
    if ((myBarco.getPosition()-60 <  myTrash.get(i).getPosX ()) && ( myTrash.get(i).getPosX () < myBarco.getPosition()+60)){
-     if (  myTrash.get(i).getPosY() == height -60){
+     if ((height - 90 < myTrash.get(i).getPosY())&&(myTrash.get(i).getPosY() < height -60)){
        println ("picked up a trash!");
        myTrash.remove( myTrash.get(i));
        points +=1;
