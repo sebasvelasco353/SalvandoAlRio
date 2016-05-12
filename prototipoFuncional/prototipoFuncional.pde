@@ -1,6 +1,9 @@
 /*
 Instalacion interactiva para el cuidado de los rios en la ciudad
- Realizado por: Sebastian Velasco
+ 
+ Realizado por: 
+ 
+ Sebastian Velasco
  Daniel PAlomino
  Sebastian Cruz
  Simon Herrera
@@ -13,6 +16,7 @@ import de.voidplus.leapmotion.*;
 
 Boat myBarco; //Boat (aKA Player) object
 GameScreen gScreen;  //Class for all game related screen
+Timer timer;
 
 LeapMotion leap;
 
@@ -32,6 +36,7 @@ void setup () { //I think i dont need to explain this
   myBarco = new Boat ();
   gScreen = new GameScreen ();
   leap = new LeapMotion (this);
+  timer = new Timer (50, 50);
  
   myTrash = new ArrayList <Trash>();
   myEmptyTrash = new ArrayList <Trash>();
