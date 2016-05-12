@@ -136,8 +136,8 @@ public void drawAndPaintTrash () {
 public void validate (){
   for (int i = 0; i < myTrash.size (); i++){
     Trash temp = myTrash.get(i);
-   if (temp.getPosX () == myBarco.getPosition()){
-     if (temp.getPosX () == height -30){
+   if ((myBarco.getPosition()-60 < temp.getPosX ()) && (temp.getPosX () < myBarco.getPosition()+60)){
+     if ( temp.getPosY() == myBarco.getPosition()){
        println ("picked up a trash!");
        myTrash.remove(myTrash.get(i));
        points +=1;
