@@ -54,6 +54,8 @@ void draw () { //RLY DUDE?
   case 1:
     thread ("addTrash");
     thread ("getHandCoord");
+    thread ("validate");
+    
     gScreen.drawIt();
     gScreen.moveGameScreen();
 
@@ -63,6 +65,7 @@ void draw () { //RLY DUDE?
     drawAndMoveTrash ();
 
     drawHearts ();
+    
     break;
     //You lost bcause of your bitchin!
   case 2:
@@ -85,7 +88,6 @@ public void addTrash () {
   
   if (elapsedTime == 5 && addThem == false) {
     addThem = true;  
-    elapsedTime = 0;
   }
   
   if (addThem == true){
@@ -93,6 +95,7 @@ public void addTrash () {
     myTrash.add (temp);
     println ("a trash was added"+ myTrash.size());
     addThem = false;
+    elapsedTime = 0;
   }
 }
 
@@ -135,12 +138,15 @@ public void drawAndMoveTrash () {
 
 public void validate (){
   for (int i = 0; i < myTrash.size (); i++){
-    Trash temp = myTrash.get(i);
-   if ((myBarco.getPosition()-60 < temp.getPosX ()) && (temp.getPosX () < myBarco.getPosition()+60)){
-     if ( temp.getPosY() == height -30){
+    //Trash temp = myTrash.get(i);
+   if ((myBarco.getPosition()-60 <  myTrash.get(i).getPosX ()) && ( myTrash.get(i).getPosX () < myBarco.getPosition()+60)){
+     if (  myTrash.get(i).getPosY() == height -60){
        println ("picked up a trash!");
-       myTrash.remove(temp);
+       myTrash.remove( myTrash.get(i));
        points +=1;
+     } else if ( myTrash.get(i).getPosY() > height -30) {
+       myTrash.remove( myTrash.get(i));
+       println ("se te escapo una");
      }
    }
   }

@@ -8,7 +8,7 @@ public class Boat {
   }
 
   public void  drawIt () {
-    image (boat, position, height -30);
+    image (boat, position, height -60);
   }
 
   public void move (int position) {
