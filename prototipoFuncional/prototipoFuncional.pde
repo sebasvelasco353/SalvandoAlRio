@@ -60,7 +60,7 @@ void draw () { //RLY DUDE?
     myBarco.drawIt ();
     myBarco.move(palmPosition);
 
-    drawAndPaintTrash ();
+    drawAndMoveTrash ();
 
     drawHearts ();
     break;
@@ -126,7 +126,7 @@ public void drawHearts () {
   }
 }
 
-public void drawAndPaintTrash () {
+public void drawAndMoveTrash () {
   for (int i = 0; i < myTrash.size(); i++) {
     myTrash.get(i).drawIt();
     myTrash.get(i).moveIt ();
@@ -137,9 +137,9 @@ public void validate (){
   for (int i = 0; i < myTrash.size (); i++){
     Trash temp = myTrash.get(i);
    if ((myBarco.getPosition()-60 < temp.getPosX ()) && (temp.getPosX () < myBarco.getPosition()+60)){
-     if ( temp.getPosY() == myBarco.getPosition()){
+     if ( temp.getPosY() == height -30){
        println ("picked up a trash!");
-       myTrash.remove(myTrash.get(i));
+       myTrash.remove(temp);
        points +=1;
      }
    }
