@@ -52,6 +52,7 @@ void draw () { //RLY DUDE?
     thread ("addTrash");
     thread ("getHandCoord");
     thread ("validate");
+    thread ("timer");
     
     gScreen.drawIt();
     gScreen.moveGameScreen();
@@ -147,4 +148,8 @@ public void validate (){
      }
    }
   }
+}
+
+public void timer () {
+  
 }
