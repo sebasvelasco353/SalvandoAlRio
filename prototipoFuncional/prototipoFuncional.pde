@@ -37,7 +37,7 @@ void setup () { //I think i dont need to explain this
   gScreen = new GameScreen ();
   leap = new LeapMotion (this);
   timer = new Timer (50, 50);
- 
+
   myTrash = new ArrayList <Trash>();
   myEmptyTrash = new ArrayList <Trash>();
   screen = 0;
@@ -54,24 +54,29 @@ void draw () { //RLY DUDE?
 
     //Game Screen
   case 1:
-    thread ("addTrash");
-    thread ("getHandCoord");
-    thread ("validate");
-    //thread ("timer");
-    
-    gScreen.drawIt();
-    gScreen.moveGameScreen();
+    if (timer.currentTime() < 60) {
+      thread ("addTrash");
+      thread ("getHandCoord");
+      thread ("validate");
+      //thread ("timer");
 
-    myBarco.drawIt ();
-    myBarco.move(palmPosition);
+      gScreen.drawIt();
+      gScreen.moveGameScreen();
 
-    drawAndMoveTrash ();
+      myBarco.drawIt ();
+      myBarco.move(palmPosition);
 
-    //drawHearts ();
-    
+      drawAndMoveTrash ();
+      timer.DisplayTime();
+      //drawHearts ();
+    } else {
+      timer.pause();
+      screen = 2;
+    }
     break;
     //You lost bcause of your bitchin!
   case 2:
+    restart();
     image (lost, width/2, height/2, width, height);
     break;
   } //Closing switch
@@ -80,6 +85,7 @@ void draw () { //RLY DUDE?
 void mousePressed () { //WTF IS WRONG WOTH YOU, you should totally know what this is for
   if (screen == 0) {
     screen = 1;
+    timer.start();
   } else {
     screen = 2;
   }
@@ -88,13 +94,13 @@ void mousePressed () { //WTF IS WRONG WOTH YOU, you should totally know what thi
 public void addTrash () {
   int elapsedTime = millis()/1000;
   boolean addThem = false;
-  
+
   if (elapsedTime == 5 && addThem == false) {
-    addThem = true;  
+    addThem = true;
   }
-  
-  if (addThem == true){
-   Trash temp = new Trash ();
+
+  if (addThem == true) {
+    Trash temp = new Trash ();
     myTrash.add (temp);
     println ("a trash was added"+ myTrash.size());
     addThem = false;
@@ -104,15 +110,16 @@ public void addTrash () {
 
 public void restart () {
   myTrash = myEmptyTrash;
-  screen = 0;
+  //screen = 0;
   myBarco.restart();
+  timer.restart();
 }
 
 public void loadImages() {
   intro = loadImage ("intro.jpg");
   game = loadImage("bg.png");
   lost = loadImage ("lost.jpg");
- // heart = loadImage ("heart.png");
+  // heart = loadImage ("heart.png");
 }
 
 public void getHandCoord () {
@@ -125,12 +132,12 @@ public void getHandCoord () {
 }
 
 /*public void drawHearts () {
-  if (life == 3) {
-    image (heart, 1000, 80);
-    image (heart, 930, 80);
-    image (heart, 850, 80);
-  }
-}*/
+ if (life == 3) {
+ image (heart, 1000, 80);
+ image (heart, 930, 80);
+ image (heart, 850, 80);
+ }
+ }*/
 
 public void drawAndMoveTrash () {
   for (int i = 0; i < myTrash.size(); i++) {
@@ -139,18 +146,18 @@ public void drawAndMoveTrash () {
   }
 }
 
-public void validate (){
-  for (int i = 0; i < myTrash.size (); i++){
+public void validate () {
+  for (int i = 0; i < myTrash.size (); i++) {
     //Trash temp = myTrash.get(i);
-   if ((myBarco.getPosition()-60 <  myTrash.get(i).getPosX ()) && ( myTrash.get(i).getPosX () < myBarco.getPosition()+60)){
-     if ((height - 90 < myTrash.get(i).getPosY())&&(myTrash.get(i).getPosY() < height -60)){
-       println ("picked up a trash!");
-       myTrash.remove( myTrash.get(i));
-       points +=1;
-     } else if ( myTrash.get(i).getPosY() > height -30) {
-       myTrash.remove( myTrash.get(i));
-       println ("se te escapo una");
-     }
-   }
+    if ((myBarco.getPosition()-60 <  myTrash.get(i).getPosX ()) && ( myTrash.get(i).getPosX () < myBarco.getPosition()+60)) {
+      if ((height - 90 < myTrash.get(i).getPosY())&&(myTrash.get(i).getPosY() < height -60)) {
+        println ("picked up a trash!");
+        myTrash.remove( myTrash.get(i));
+        points +=1;
+      } else if ( myTrash.get(i).getPosY() > height -30) {
+        myTrash.remove( myTrash.get(i));
+        println ("se te escapo una");
+      }
+    }
   }
 }

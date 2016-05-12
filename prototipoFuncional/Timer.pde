@@ -57,11 +57,8 @@ class Timer {
     String output = "";
     theTime = currentTime() ;
     output = output + theTime ;
-    // println("output = " + output) ;
+    println("output = " + output) ;
     fill(150,0,200) ;
-    PFont font ;
-    font = loadFont("Arial-Black-48.vlw") ;
-    textFont(font) ;
     text(output,x,y) ;
    }
 }
