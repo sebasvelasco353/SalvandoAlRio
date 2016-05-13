@@ -94,7 +94,6 @@ void mousePressed () { //WTF IS WRONG WOTH YOU, you should totally know what thi
 } //cierro mousePressed
 
 public void addTrash () {
-    
     println ("hfhsdf");
     if (millis() >= time+2000){
         Trash temp = new Trash ();
