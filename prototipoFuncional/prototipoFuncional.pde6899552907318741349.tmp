@@ -130,7 +130,7 @@ public void getHandCoord () {
 
     palmPosition = (int) hand_position.x;
   }
-  //myBarco.move(palmPosition);
+  myBarco.move(palmPosition);
 }
 
 /*public void drawHearts () {
