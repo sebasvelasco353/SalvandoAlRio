@@ -2,11 +2,11 @@ public class GameScreen {
   int y_Coord; //Y_coord refers to position of gameScreen on Y axis  
 
   public GameScreen () {
-    //y_Coord = -1940;
-    y_Coord = height/2;  
+    y_Coord = -2000;
+    //y_Coord = height/2;  
 }
   public void drawIt () {
-    image (game, width/2, y_Coord);
+    image (game, width/2, y_Coord, width, 5400);
     //thread ("moveGameScren");
   }
 

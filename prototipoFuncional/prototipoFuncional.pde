@@ -46,6 +46,7 @@ void setup () { //I think i dont need to explain this
 }
 
 void draw () { //RLY DUDE?
+background (255);
   switch (screen) {
 
     //Intro screen
@@ -61,9 +62,9 @@ void draw () { //RLY DUDE?
       thread ("validate");
       //thread ("timer");
 
-      gScreen.moveGameScreen();
+      //gScreen.moveGameScreen();
       gScreen.drawIt();
-      //thread ("moveScreen");      
+      thread ("moveScreen");      
 
       myBarco.drawIt ();
       myBarco.move(palmPosition);
@@ -137,8 +138,9 @@ public void getHandCoord () {
 
 public void drawAndMoveTrash () {
   for (int i = 0; i < myTrash.size(); i++) {
-    myTrash.get(i).drawIt();
-    myTrash.get(i).moveIt ();
+    Trash temp = myTrash.get(i);
+    temp.drawIt();
+    temp.moveIt ();
   }
 }
 
