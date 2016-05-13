@@ -93,14 +93,10 @@ void mousePressed () { //WTF IS WRONG WOTH YOU, you should totally know what thi
 } //cierro mousePressed
 
 public void addTrash () {
-    int time = millis();
-    println ("hfhsdf");
-    if (millis() >= time){
-        Trash temp = new Trash ();
-        myTrash.add (temp);
-        println ("a trash was added"+ myTrash.size());
-        time = millis();
-      }
+  
+    Trash temp = new Trash ();
+    myTrash.add (temp);
+    println ("a trash was added"+ myTrash.size());
 }
 
 public void restart () {
