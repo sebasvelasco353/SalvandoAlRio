@@ -30,7 +30,7 @@ PImage intro, game, lost; // heart;
 
 void setup () { //I think i dont need to explain this
   fullScreen(); //Fullscreen application bitch!
-
+  
   smooth ();
   imageMode (CENTER);
   loadImages (); //Method that loads every IMG that im going to use.
@@ -61,9 +61,9 @@ void draw () { //RLY DUDE?
       thread ("validate");
       //thread ("timer");
 
+      gScreen.moveGameScreen();
       gScreen.drawIt();
-      thread ("moveScreen");
-      //gScreen.moveGameScreen();
+      //thread ("moveScreen");      
 
       myBarco.drawIt ();
       myBarco.move(palmPosition);
