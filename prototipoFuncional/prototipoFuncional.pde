@@ -25,6 +25,7 @@ ArrayList <Trash> myEmptyTrash;
 int screen, life, points; 
 
 int palmPosition;
+int time = millis(); //for the timer that adds trash
 PImage intro, game, lost; // heart;
 
 void setup () { //I think i dont need to explain this
@@ -93,9 +94,9 @@ void mousePressed () { //WTF IS WRONG WOTH YOU, you should totally know what thi
 } //cierro mousePressed
 
 public void addTrash () {
-    int time = millis();
+    
     println ("hfhsdf");
-    if (millis() >= time){
+    if (millis() >= time+2000){
         Trash temp = new Trash ();
         myTrash.add (temp);
         println ("a trash was added"+ myTrash.size());
