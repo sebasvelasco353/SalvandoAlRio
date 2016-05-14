@@ -31,7 +31,7 @@ int palmPosition;
 int time = millis(); //for the timer that adds trash
 PImage intro, game, lost, heart;
 
-String shouldBe = "GO";
+char shouldBe = '1';
 String recieved;
 
 void setup () { //I think i dont need to explain this
@@ -202,18 +202,29 @@ public void moveScreen () {
 }
 
 public void readFromSerial () {
+  //recieved = null;
+  boolean playIt = false;
+  
   if ( myPort.available() > 0) {  // If data is available,
     recieved = myPort.readStringUntil('\n');         // read it and store it in val
-    //int dist = Integer.parseInt(recieved);
-    //println (dist);
+    char[] ch = recieved.toCharArray();
+   
+    if (ch [0] == shouldBe){
+    playIt = true;
+    ch[0] = '0';
+    } else {
+     playIt = false; 
+    }
+    
     println (recieved);
-    if (recieved != null) {
+    println (playIt);
+    if (playIt == true) {
       timer.start();
       screen = 1;
-      recieved = null;
-    } //else {
-    //restart ();
-    //screen = 0;
-    //}
+      //recieved = "0";
+    } else {
+      restart ();
+      screen = 0;
+    }
   }
 }
