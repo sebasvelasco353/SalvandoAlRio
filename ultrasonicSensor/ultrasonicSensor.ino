@@ -16,6 +16,6 @@ void loop(){
  // Serial.println("DONT");
  //Serial.println("0");
  }
- //delay(100);
+ delay(100);
 }
 

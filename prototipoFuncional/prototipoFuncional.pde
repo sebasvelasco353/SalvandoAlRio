@@ -92,12 +92,14 @@ void draw () { //RLY DUDE?
     break;
     //You lost bcause of your bitchin!
   case 2:
+    recieved = null;
     restart();
+    println (recieved);
     //thread ("readFromSerial");
     if (millis() >= time+6000) {
-    screen = 1;
-   // time = millis();
-  }
+      screen = 0;
+      time = millis();
+    }
     image (lost, width/2, height/2, width, height);
     break;
   } //Closing switch
@@ -126,6 +128,8 @@ public void restart () {
   //myTrash = myEmptyTrash;
   myTrash.clear();
   //screen = 0;
+  recieved = null;
+  life = 3;
   myBarco.restart();
   timer.restart();
 }
@@ -206,9 +210,10 @@ public void readFromSerial () {
     if (recieved != null) {
       timer.start();
       screen = 1;
+      recieved = null;
     } //else {
-      //restart ();
-      //screen = 0;
+    //restart ();
+    //screen = 0;
     //}
   }
 }
