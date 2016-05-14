@@ -29,7 +29,7 @@ Serial myPort;
 
 int palmPosition;
 int time = millis(); //for the timer that adds trash
-PImage intro, game, lost; // heart;
+PImage intro, game, lost, heart;
 
 String shouldBe = "GO";
 String recieved;
@@ -63,7 +63,6 @@ void draw () { //RLY DUDE?
   case 0:
     image (intro, width/2, height/2, width, height);
     thread ("readFromSerial");
-    //readFromSerial ();
     break;
 
     //Game Screen
@@ -84,7 +83,8 @@ void draw () { //RLY DUDE?
       drawAndMoveTrash ();
       timer.DisplayTime();
       myBarco.drawIt ();
-      //drawHearts ();
+      drawHearts ();
+      text (points, 50, 100);
     } else {
       timer.pause();
       screen = 2;
@@ -93,6 +93,11 @@ void draw () { //RLY DUDE?
     //You lost bcause of your bitchin!
   case 2:
     restart();
+    //thread ("readFromSerial");
+    if (millis() >= time+6000) {
+    screen = 1;
+   // time = millis();
+  }
     image (lost, width/2, height/2, width, height);
     break;
   } //Closing switch
@@ -118,7 +123,8 @@ public void addTrash () {
 }
 
 public void restart () {
-  myTrash = myEmptyTrash;
+  //myTrash = myEmptyTrash;
+  myTrash.clear();
   //screen = 0;
   myBarco.restart();
   timer.restart();
@@ -128,7 +134,7 @@ public void loadImages() {
   intro = loadImage ("intro.jpg");
   game = loadImage("bg.png");
   lost = loadImage ("lost.jpg");
-  // heart = loadImage ("heart.png");
+  heart = loadImage ("heart.png");
 }
 
 public void getHandCoord () {
@@ -141,13 +147,26 @@ public void getHandCoord () {
   //myBarco.move(palmPosition);
 }
 
-/*public void drawHearts () {
- if (life == 3) {
- image (heart, 1000, 80);
- image (heart, 930, 80);
- image (heart, 850, 80);
- }
- }*/
+public void drawHearts () {
+  switch (life) {
+  case 3:
+    image (heart, 1000, 80);
+    image (heart, 930, 80);
+    image (heart, 850, 80);
+    break;
+  case 2:
+    image (heart, 1000, 80);
+    image (heart, 930, 80);
+    break;
+  case 1:
+    image (heart, 1000, 80);
+    break;
+  case 0:
+    //restart();
+    screen = 2;
+    break;
+  }
+}
 
 public void drawAndMoveTrash () {
   for (int i = 0; i < myTrash.size(); i++) {
@@ -162,12 +181,13 @@ public void validate () {
     //Trash temp = myTrash.get(i);
     if ((myBarco.getPosition()-60 <  myTrash.get(i).getPosX ()) && ( myTrash.get(i).getPosX () < myBarco.getPosition()+60)) {
       if ((height - 90 < myTrash.get(i).getPosY())&&(myTrash.get(i).getPosY() < height -60)) {
-        //println ("picked up a trash!");
+        println ("picked up a trash!");
         myTrash.remove( myTrash.get(i));
         points +=1;
-      } else if ( myTrash.get(i).getPosY() > height -30) {
+      } else if ( myTrash.get(i).getPosY() > height -50) {
         myTrash.remove( myTrash.get(i));
-        //println ("se te escapo una");
+        life -= 1;
+        println ("se te escapo una");
       }
     }
   }
@@ -182,9 +202,13 @@ public void readFromSerial () {
     recieved = myPort.readStringUntil('\n');         // read it and store it in val
     //int dist = Integer.parseInt(recieved);
     //println (dist);
-    //println (shouldBe);
-   if (recieved != null) {
+    println (recieved);
+    if (recieved != null) {
+      timer.start();
       screen = 1;
-     } 
+    } //else {
+      //restart ();
+      //screen = 0;
+    //}
   }
 }
