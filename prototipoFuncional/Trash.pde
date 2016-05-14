@@ -4,7 +4,7 @@ public class Trash {
   int type = (int) random (0, 4);;
   
   public Trash () {
-    posX = (int) random (40, width-40);
+    posX = (int) random (125, width-125);
     posY = -10;
     
     switch (type){

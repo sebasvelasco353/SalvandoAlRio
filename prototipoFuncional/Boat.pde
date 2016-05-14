@@ -12,7 +12,7 @@ public class Boat {
   }
 
   public void move (int position) {
-    if ((position > 80) && (position < width-80)) {
+    if ((position > 125) && (position < width-125)) {
       this.position = position;
     }
   }
