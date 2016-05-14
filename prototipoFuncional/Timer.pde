@@ -57,7 +57,7 @@ class Timer {
     String output = "";
     theTime = currentTime() ;
     output = output + theTime ;
-    println("output = " + output) ;
+    //println("output = " + output) ;
     fill(150,0,200) ;
     text(output,x,y) ;
    }

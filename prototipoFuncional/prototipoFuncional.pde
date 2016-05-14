@@ -30,14 +30,16 @@ Serial myPort;
 int palmPosition;
 int time = millis(); //for the timer that adds trash
 PImage intro, game, lost; // heart;
-int val;
-String recieved;
+
+String shouldBe = "GO";
+String recieved = null;
 
 void setup () { //I think i dont need to explain this
   fullScreen(); //Fullscreen application bitch!
-  
+
   smooth ();
   imageMode (CENTER);
+  //println (Serial.list()[0]);
   String portName = Serial.list()[0];
   myPort = new Serial(this, portName, 9600); 
   loadImages (); //Method that loads every IMG that im going to use.
@@ -53,16 +55,14 @@ void setup () { //I think i dont need to explain this
 }
 
 void draw () { //RLY DUDE?
-background (255);
+  background (255);
   switch (screen) {
 
     //Intro screen
   case 0:
     image (intro, width/2, height/2, width, height);
     thread ("readFromSerial");
-    if (val < 40){
-      screen = 1;
-    }
+    //readFromSerial ();
     break;
 
     //Game Screen
@@ -77,7 +77,7 @@ background (255);
       gScreen.drawIt();
       //thread ("moveScreen");      
 
-     
+
       myBarco.move(palmPosition);
 
       drawAndMoveTrash ();
@@ -107,13 +107,13 @@ void mousePressed () { //WTF IS WRONG WOTH YOU, you should totally know what thi
 } //cierro mousePressed
 
 public void addTrash () {
-    //println ("hfhsdf");
-    if (millis() >= time+2000){
-        Trash temp = new Trash ();
-        myTrash.add (temp);
-      //  println ("a trash was added"+ myTrash.size());
-        time = millis();
-      }
+  //println ("hfhsdf");
+  if (millis() >= time+2000) {
+    Trash temp = new Trash ();
+    myTrash.add (temp);
+    //  println ("a trash was added"+ myTrash.size());
+    time = millis();
+  }
 }
 
 public void restart () {
@@ -172,15 +172,18 @@ public void validate () {
   }
 }
 
-public void moveScreen (){
-      gScreen.moveGameScreen(); 
+public void moveScreen () {
+  gScreen.moveGameScreen();
 }
 
-public void readFromSerial (){
- if ( myPort.available() > 0) 
+public void readFromSerial () {
+  if ( myPort.available() > 0) 
   {  // If data is available,
-  recieved = myPort.readStringUntil('\n');         // read it and store it in val
-  val = Integer.parseInt(recieved);
-  println (val);
-  }  
+    recieved = myPort.readStringUntil('\n');         // read it and store it in val
+    println (recieved);
+    println (myPort.readStringUntil('\n'));
+  }
+  /*if (recieved.equals(shouldBe) == true) {
+      screen = 1;
+    } */
 }

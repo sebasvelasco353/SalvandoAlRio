@@ -2,7 +2,7 @@ public class GameScreen {
   int y_Coord; //Y_coord refers to position of gameScreen on Y axis  
 
   public GameScreen () {
-    y_Coord = -2000;
+    y_Coord = -1500;
     //y_Coord = height/2;  
 }
   public void drawIt () {
