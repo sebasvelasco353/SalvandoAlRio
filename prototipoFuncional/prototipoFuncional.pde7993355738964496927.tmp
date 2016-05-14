@@ -180,11 +180,10 @@ public void moveScreen () {
 public void readFromSerial () {
   if ( myPort.available() > 0) {  // If data is available,
     recieved = myPort.readStringUntil('\n');         // read it and store it in val
-    //int dist = Integer.parseInt(recieved);
-    //println (dist);
-    //println (shouldBe);
-   if (recieved != null) {
+    //println (recieved);
+    println (shouldBe);
+    if (recieved.equals("GO") == true) {
       screen = 1;
-     } 
+    } 
   }
 }

@@ -10,11 +10,12 @@ void setup() {
 void loop(){
  distance = ultrasonic.Ranging(CM);
  if (distance < 35){
- Serial.println("GO"); // CM or INC
- //Serial.println(" cm" );
+ //Serial.println("GO"); // CM or INC
+ Serial.println("1");
  } else {
-  Serial.println("DONT");
+ // Serial.println("DONT");
+ //Serial.println("0");
  }
- delay(100);
+ //delay(100);
 }
 
