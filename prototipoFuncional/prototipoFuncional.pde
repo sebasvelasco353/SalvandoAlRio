@@ -64,13 +64,14 @@ background (255);
 
       //gScreen.moveGameScreen();
       gScreen.drawIt();
-      thread ("moveScreen");      
+      //thread ("moveScreen");      
 
-      myBarco.drawIt ();
+     
       myBarco.move(palmPosition);
 
       drawAndMoveTrash ();
       timer.DisplayTime();
+      myBarco.drawIt ();
       //drawHearts ();
     } else {
       timer.pause();
