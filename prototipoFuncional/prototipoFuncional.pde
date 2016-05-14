@@ -13,6 +13,7 @@ Instalacion interactiva para el cuidado de los rios en la ciudad
  */
 
 import de.voidplus.leapmotion.*;
+import processing.serial.*;
 
 Boat myBarco; //Boat (aKA Player) object
 GameScreen gScreen;  //Class for all game related screen
@@ -24,15 +25,21 @@ ArrayList <Trash> myTrash;
 ArrayList <Trash> myEmptyTrash;
 int screen, life, points; 
 
+Serial myPort;
+
 int palmPosition;
 int time = millis(); //for the timer that adds trash
 PImage intro, game, lost; // heart;
+int val;
+String recieved;
 
 void setup () { //I think i dont need to explain this
   fullScreen(); //Fullscreen application bitch!
   
   smooth ();
   imageMode (CENTER);
+  String portName = Serial.list()[0];
+  myPort = new Serial(this, portName, 9600); 
   loadImages (); //Method that loads every IMG that im going to use.
   myBarco = new Boat ();
   gScreen = new GameScreen ();
@@ -52,6 +59,10 @@ background (255);
     //Intro screen
   case 0:
     image (intro, width/2, height/2, width, height);
+    thread ("readFromSerial");
+    if (val < 40){
+      screen = 1;
+    }
     break;
 
     //Game Screen
@@ -96,11 +107,11 @@ void mousePressed () { //WTF IS WRONG WOTH YOU, you should totally know what thi
 } //cierro mousePressed
 
 public void addTrash () {
-    println ("hfhsdf");
+    //println ("hfhsdf");
     if (millis() >= time+2000){
         Trash temp = new Trash ();
         myTrash.add (temp);
-        println ("a trash was added"+ myTrash.size());
+      //  println ("a trash was added"+ myTrash.size());
         time = millis();
       }
 }
@@ -150,12 +161,12 @@ public void validate () {
     //Trash temp = myTrash.get(i);
     if ((myBarco.getPosition()-60 <  myTrash.get(i).getPosX ()) && ( myTrash.get(i).getPosX () < myBarco.getPosition()+60)) {
       if ((height - 90 < myTrash.get(i).getPosY())&&(myTrash.get(i).getPosY() < height -60)) {
-        println ("picked up a trash!");
+        //println ("picked up a trash!");
         myTrash.remove( myTrash.get(i));
         points +=1;
       } else if ( myTrash.get(i).getPosY() > height -30) {
         myTrash.remove( myTrash.get(i));
-        println ("se te escapo una");
+        //println ("se te escapo una");
       }
     }
   }
@@ -163,4 +174,13 @@ public void validate () {
 
 public void moveScreen (){
       gScreen.moveGameScreen(); 
+}
+
+public void readFromSerial (){
+ if ( myPort.available() > 0) 
+  {  // If data is available,
+  recieved = myPort.readStringUntil('\n');         // read it and store it in val
+  val = Integer.parseInt(recieved);
+  println (val);
+  }  
 }
