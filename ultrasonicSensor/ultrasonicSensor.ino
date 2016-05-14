@@ -13,7 +13,7 @@ void loop(){
  Serial.println("GO"); // CM or INC
  //Serial.println(" cm" );
  } else {
-  Serial.print("DONT");
+  Serial.println("DONT");
  }
  delay(100);
 }

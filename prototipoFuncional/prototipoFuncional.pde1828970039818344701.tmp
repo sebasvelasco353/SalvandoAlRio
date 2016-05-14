@@ -32,7 +32,7 @@ int time = millis(); //for the timer that adds trash
 PImage intro, game, lost; // heart;
 
 String shouldBe = "GO";
-String recieved = null;
+String recieved;
 
 void setup () { //I think i dont need to explain this
   fullScreen(); //Fullscreen application bitch!
@@ -42,6 +42,7 @@ void setup () { //I think i dont need to explain this
   //println (Serial.list()[0]);
   String portName = Serial.list()[0];
   myPort = new Serial(this, portName, 9600); 
+  readFromSerial();
   loadImages (); //Method that loads every IMG that im going to use.
   myBarco = new Boat ();
   gScreen = new GameScreen ();
@@ -181,9 +182,9 @@ public void readFromSerial () {
   {  // If data is available,
     recieved = myPort.readStringUntil('\n');         // read it and store it in val
     println (recieved);
-    println (myPort.readStringUntil('\n'));
+    println (shouldBe);
+  //if (recieved.equals(shouldBe) == true) {
+    //screen = 1;
+    //} 
   }
-  /*if (recieved.equals(shouldBe) == true) {
-      screen = 1;
-    } */
 }
